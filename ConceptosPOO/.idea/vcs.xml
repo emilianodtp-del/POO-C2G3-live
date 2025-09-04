@@ -2,7 +2,5 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/ConceptosPOO/POO-C2G3-live" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/src/POO-C2G3-live" vcs="Git" />
   </component>
 </project>

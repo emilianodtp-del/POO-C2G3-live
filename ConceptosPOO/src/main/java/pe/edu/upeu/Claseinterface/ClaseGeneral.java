@@ -1,13 +1,13 @@
-package pe.edu.upeu.Claseinterface;
+package pe.edu.upeu.claseinterface;
 
 public class ClaseGeneral {
     public static void main(String[] args) {
         Animal a=new Loro();
-        a.Dormir();
-        a.EmitirSonido();
+        a.emitirSonido();
+        a.dormir();
 
         a=new Gato();
-        a.Dormir();
-        a.EmitirSonido();
+        a.emitirSonido();
+        a.dormir();
     }
 }

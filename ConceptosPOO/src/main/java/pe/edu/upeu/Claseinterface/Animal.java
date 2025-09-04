@@ -1,7 +1,6 @@
-package pe.edu.upeu.Claseinterface;
+package pe.edu.upeu.claseinterface;
 
 public interface Animal {
-    void EmitirSonido();
-    void Dormir();
-
+    void emitirSonido();
+    void dormir();
 }

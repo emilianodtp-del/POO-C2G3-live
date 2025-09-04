@@ -1,9 +1,10 @@
-package pe.edu.upeu.Polimorfismo;
+package pe.edu.upeu.polimorfismo;
 
 public class Loro extends Animal {
-    @Override
-    void SonidoAnimal(){
-        System.out.println("No te entiendo porque"+" sigues jugando");
-    }
 
+    @Override
+    void sonidoAnimal() {
+        System.out.println("No te entiendo por que" +
+                " sigues jugando");
+    }
 }

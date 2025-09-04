@@ -41,19 +41,19 @@
 			<optional>true</optional>
 		</dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-controls -->
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>21</version>
-        </dependency>
+		<!-- https://mvnrepository.com/artifact/org.openjfx/javafx-controls -->
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-controls</artifactId>
+			<version>21</version>
+		</dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-fxml -->
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>21</version>
-        </dependency>
+		<!-- https://mvnrepository.com/artifact/org.openjfx/javafx-fxml -->
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-fxml</artifactId>
+			<version>21</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -86,7 +86,7 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
-                    <mainClass>pe.edu.upeu.asistencia.Aplication</mainClass>
+					<mainClass>pe.edu.upeu.asistencia.Aplication</mainClass>
 				</configuration>
 			</plugin>
 		</plugins>

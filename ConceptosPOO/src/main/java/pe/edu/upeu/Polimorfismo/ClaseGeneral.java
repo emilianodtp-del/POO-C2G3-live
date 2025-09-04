@@ -1,11 +1,11 @@
-package pe.edu.upeu.Polimorfismo;
+package pe.edu.upeu.polimorfismo;
 
 public class ClaseGeneral {
     public static void main(String[] args) {
         Gato g = new Gato();
-        g.SonidoAnimal();
+        g.sonidoAnimal();
 
         Loro l = new Loro();
-        l.SonidoAnimal();
+        l.sonidoAnimal();
     }
 }

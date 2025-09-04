@@ -1,15 +1,13 @@
-package pe.edu.upeu.Claseinterface;
+package pe.edu.upeu.claseinterface;
 
 public class Gato implements Animal {
     @Override
-    public void EmitirSonido() {
-        System.out.println("Soy el señor de la noche mauuuuu...mauuuuu");
-
+    public void emitirSonido() {
+        System.out.println("Meu...meu..");
     }
 
     @Override
-    public void Dormir() {
-        System.out.println("Zzzzz.....Zzzzz");
-
+    public void dormir() {
+        System.out.println("Zzzz....Zzz..");
     }
 }

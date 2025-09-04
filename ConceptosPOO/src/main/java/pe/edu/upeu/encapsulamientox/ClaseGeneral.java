@@ -1,7 +1,6 @@
-package pe.edu.upeu.encapsulamiento;
+package pe.edu.upeu.encapsulamientox;
 
 public class ClaseGeneral {
-
     public static void main(String[] args) {
         Persona p = new Persona();// p=objeto
         //p.nombre = "David";
@@ -14,7 +13,7 @@ public class ClaseGeneral {
         Persona p2 = new Persona("David", "Mamani", 25);
         p2.saludo();
 
-        Trabajador t = new Trabajador();//t=objeto
+        Trabajador t = new Trabajador();//  t=objeto
         t.setNombre("David");
         t.setApellido("Mamani");
         t.setEdad(25);
@@ -23,5 +22,4 @@ public class ClaseGeneral {
         System.out.println(t);
 
     }
-
 }
