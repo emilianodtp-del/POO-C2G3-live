@@ -1,5 +1,6 @@
 package pe.edu.upeu.asistencia.control;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
+import java.util.Map;
 
 
 @Controller
@@ -23,20 +25,31 @@ public class MainguiController {
 
     @FXML
     private TabPane tabPane;
-
     @Autowired
     private ApplicationContext context;
-
     @FXML
     public void initialize() {
-
+        MenuItemListener miL=new MenuItemListener();
+        menuItem1.setOnAction(miL::handle);
+        menuItem2.setOnAction(miL::handle);
     }
-
     class MenuItemListener{
-
-
+        Map<String, String[]> menuConfig=Map.of(
+                            "menuItem1",new String[]{"/fxml/main_participante.fxml","Participantes","T"},
+                            "menuItem2",new String[]{"/fxml/login.fxml","Salir","C"}
+                                );
 
         public void handle(ActionEvent e) {
+            String id= ( (MenuItem) e.getSource() ).getId();
+            if(menuConfig.containsKey(id)){
+                String[] mi=menuConfig.get(id);
+                if(mi[2].equals("C")){
+                    Platform.exit();
+                    System.exit(0);
+                }else{
+                    abrirArchivoFXML(mi[0],mi[1]);
+                }
+            }
         }
 
         public void abrirArchivoFXML(String filename, String tittle){
@@ -45,7 +58,7 @@ public class MainguiController {
             loader.setControllerFactory(context::getBean);
             Parent root = loader.load();
 
-            ScrollPane scrollPane = (ScrollPane) root;
+            ScrollPane scrollPane = new ScrollPane(root);
             scrollPane.setFitToWidth(true);
             scrollPane.setFitToHeight(true);
             Tab newTab = new  Tab(tittle, scrollPane);
@@ -56,10 +69,6 @@ public class MainguiController {
                 throw new RuntimeException(ex);
             }
         }
-
-
-
-
     }
 
     class MenuListener{
