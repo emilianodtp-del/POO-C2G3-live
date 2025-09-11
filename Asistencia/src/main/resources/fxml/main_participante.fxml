@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.edu.upeu.asistencia.control.ParticipanteController">
+<AnchorPane prefHeight="399.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.edu.upeu.asistencia.control.ParticipanteController">
    <children>
-      <VBox prefHeight="400.0" prefWidth="397.0">
+      <VBox layoutX="-5.0" layoutY="-3.0" prefHeight="407.0" prefWidth="604.0" AnchorPane.bottomAnchor="-5.0" AnchorPane.leftAnchor="-5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="-3.0">
          <children>
-            <AnchorPane prefHeight="199.0" prefWidth="418.0">
+            <AnchorPane>
                <children>
-                  <Label layoutX="14.0" layoutY="17.0" text="Gestion de Aprendizaje" textFill="#141414" />
-                  <Label layoutX="248.0" layoutY="75.0" text="Buscar participante" />
-                  <TextField layoutX="234.0" layoutY="100.0" />
+                  <Label layoutX="14.0" layoutY="14.0" text="Gestion de Participante">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="295.0" layoutY="53.0" text="Buscar Participante" />
+                  <TextField layoutX="295.0" layoutY="70.0" />
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane prefHeight="275.0" prefWidth="590.0">
                <children>
-                  <HBox prefHeight="200.0" prefWidth="397.0">
+                  <HBox layoutX="34.0" layoutY="41.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                      <children>
                         <GridPane>
                           <columnConstraints>
@@ -27,18 +32,54 @@
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="27.0" minHeight="27.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="27.0" minHeight="27.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="27.0" minHeight="27.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="27.0" minHeight="27.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="27.0" minHeight="27.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="27.0" minHeight="27.0" prefHeight="27.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label text="Formulario" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" GridPane.columnIndex="1" GridPane.columnSpan="2" />
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="17.0" text="Formulario" GridPane.columnSpan="2147483647">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
+                              <Label text="DNI:" GridPane.rowIndex="1" />
+                              <Label text="Nombre:" GridPane.rowIndex="2" />
+                              <TextField fx:id="txtDni" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                              <TextField fx:id="txtNombres" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+                              <TextField fx:id="txtApellidos" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+                              <Label text="Apellido:" GridPane.rowIndex="3" />
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Buscar" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </Button>
+                              <Label text="Carrera:" GridPane.rowIndex="4" />
+                              <Label text="Participante:" GridPane.rowIndex="5" />
+                              <ComboBox fx:id="cbxCarrera" maxWidth="1.7976931348623157E308" prefWidth="150.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+                              <ComboBox fx:id="cbxTipoParticipante" maxWidth="1.7976931348623157E308" prefWidth="150.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#crearParticipante" text="Guardar" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                 <GridPane.margin>
+                                    <Insets right="5.0" />
+                                 </GridPane.margin>
+                              </Button>
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Cancelar" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </Button>
                            </children>
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
                         </GridPane>
+                        <AnchorPane>
+                           <children>
+                              <TableView fx:id="tableView" layoutY="14.0" maxWidth="1.7976931348623157E308" prefWidth="700.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                           </children>
+                        </AnchorPane>
                      </children>
                   </HBox>
                </children>

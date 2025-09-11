@@ -19,7 +19,7 @@ import java.util.Map;
 public class MainguiController {
 
     @FXML
-    private MenuItem menuItem1, menuItem2, menuItem3,  menuItem4;
+    private MenuItem menuItem1, menuItem2, menuItem3, menuItem4;
 
     @FXML
     private MenuBar menuBar;
@@ -84,6 +84,8 @@ public class MainguiController {
             }
 
         }
+
+
 
 
     }
