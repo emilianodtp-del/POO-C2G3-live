@@ -1,1 +1,0 @@
-# Erick-Franck-Ruelas-Mamani-C2---G3
