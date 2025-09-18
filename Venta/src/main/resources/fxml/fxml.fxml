@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="pe.edu.upeu.venta.clienteapp.controller.MainViewController"
+            stylesheets="@../application.css">
+    <top>
+        <ToolBar>
+            <items>
+                <Label text="Clientes"/>
+                <Separator orientation="VERTICAL"/>
+                <TextField fx:id="searchField" promptText="Buscar por nombre, email o teléfono" HBox.hgrow="ALWAYS"/>
+                <Button text="Nuevo" onAction="#onNew"/>
+                <Button text="Editar" onAction="#onEdit"/>
+                <Button text="Eliminar" onAction="#onDelete"/>
+            </items>
+        </ToolBar>
+    </top>
+    <center>
+        <TableView fx:id="clienteTable" prefHeight="400.0" prefWidth="700.0">
+            <columns>
+                <TableColumn fx:id="idColumn" text="ID" prefWidth="60.0"/>
+                <TableColumn fx:id="nombreColumn" text="Nombre" prefWidth="180.0"/>
+                <TableColumn fx:id="emailColumn" text="Email" prefWidth="220.0"/>
+                <TableColumn fx:id="telefonoColumn" text="Teléfono" prefWidth="140.0"/>
+                <TableColumn fx:id="fechaColumn" text="Registro" prefWidth="120.0"/>
+            </columns>
+        </TableView>
+    </center>
+    <padding>
+        <Insets topRightBottomLeft="8"/>
+    </padding>
+    <bottom>
+        <Label text="Doble clic en una fila para editar"/>
+    </bottom>
+</BorderPane>

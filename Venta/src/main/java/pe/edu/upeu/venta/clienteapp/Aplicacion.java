@@ -1,8 +1,8 @@
-package pe.edu.upeu.asistencia;
+package pe.edu.upeu.venta.clienteapp;
 
-public class Aplication {
+public class Aplicacion {
     public static void main(String[] args) {
         System.out.println("Iniciando  DMP");
-        AsistenciaApplication.main(args);
+        MainApp.main(args);
     }
 }
