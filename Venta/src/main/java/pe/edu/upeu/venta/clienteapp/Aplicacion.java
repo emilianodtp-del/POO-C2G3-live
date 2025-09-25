@@ -3,6 +3,7 @@ package pe.edu.upeu.venta.clienteapp;
 public class Aplicacion {
     public static void main(String[] args) {
         System.out.println("Iniciando  DMP");
-        MainApp.main(args);
+        AsistenciaAplicacion.main(args);
+
     }
 }

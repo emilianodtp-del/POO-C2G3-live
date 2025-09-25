@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -19,6 +20,7 @@ public class AsistenciaApplication extends Application {
 	private Parent parent;
 
 	public static void main(String[] args) {
+		//SpringApplication.run(AsistenciaApplication.class, args);
 		launch(args);
 	}
 

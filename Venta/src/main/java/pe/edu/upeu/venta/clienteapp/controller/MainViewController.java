@@ -1,4 +1,6 @@
 package pe.edu.upeu.venta.clienteapp.controller;
+
+import org.springframework.stereotype.Controller;
 import pe.edu.upeu.venta.clienteapp.model.Cliente;
 import pe.edu.upeu.venta.clienteapp.repository.ClienteRepository;
 import pe.edu.upeu.venta.clienteapp.service.ClienteService;
@@ -20,6 +22,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.function.Predicate;
 
+@Controller
 public class MainViewController {
 
     @FXML private TableView<Cliente> clienteTable;

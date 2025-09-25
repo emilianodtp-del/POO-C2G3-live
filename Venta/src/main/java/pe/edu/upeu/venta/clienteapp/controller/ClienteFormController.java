@@ -4,12 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.springframework.stereotype.Controller;
 import pe.edu.upeu.venta.clienteapp.model.Cliente;
 
 import java.time.LocalDate;
 import java.util.regex.Pattern;
 import java.awt.*;
 
+@Controller
 public class ClienteFormController {
 
     @FXML private TextField nombreField;
