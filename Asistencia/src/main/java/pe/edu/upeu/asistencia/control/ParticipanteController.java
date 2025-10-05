@@ -63,7 +63,7 @@ public class ParticipanteController {
                         });
                         btnEliminar.setOnAction((event) -> {
                             Participante participante =  getTableView().getItems().get(getIndex());
-                            eliminarParticipante(participante.getDni());
+                            eliminarParticipante(participante.getDni().getValue());
                         });
                     }
                 @Override
@@ -81,23 +81,20 @@ public class ParticipanteController {
         opcionCol.setCellFactory(cellFactory);
     }
     public void editarParticipante(Participante p, int index){
-        txtDni.setText(p.getDni());
-        txtNombres.setText(p.getNombre());
-        txtApellidos.setText(p.getApellidos());
+        txtDni.setText(p.getDni().getValue());
+        txtNombres.setText(p.getNombre().getValue());
+        txtApellidos.setText(p.getApellidos().getValue());
         cbxCarrera.getSelectionModel().select(p.getCarrera());
         cbxTipoParticipante.getSelectionModel().select(p.getTipoParticipante());
         indexE=index;
     }
     public void listarParticipantes(){
         dniCol.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getDni())
-        );
+                cellData.getValue().getDni());
         nombreCol.setCellValueFactory(cellData ->
-                new  SimpleStringProperty(cellData.getValue().getNombre())
-        );
+                cellData.getValue().getNombre());
         apellidoCol.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getApellidos())
-        );
+                cellData.getValue().getApellidos());
         carreraCol.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getCarrera().toString()));
         tipoPartCol.setCellValueFactory(cellData ->
@@ -110,12 +107,11 @@ public class ParticipanteController {
     @FXML
     public void crearParticipante(){
         Participante participante = new Participante();
-        participante.setDni(txtDni.getText());
-        participante.setNombre(txtNombres.getText());
-        participante.setApellidos(txtApellidos.getText());
+        participante.setDni(new SimpleStringProperty(txtDni.getText()));
+        participante.setNombre(new SimpleStringProperty(txtNombres.getText()));
+        participante.setApellidos(new SimpleStringProperty(txtApellidos.getText()));
         participante.setCarrera(cbxCarrera.getValue());
         participante.setTipoParticipante(cbxTipoParticipante.getValue());
-        participante.setEstado(true);
         if(indexE==-1){
             ps.save(participante);
         }else{
