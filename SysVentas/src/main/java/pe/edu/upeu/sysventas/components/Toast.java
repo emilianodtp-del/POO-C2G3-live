@@ -11,6 +11,7 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+// esta clase es como permite hacer un mensaje
 public class Toast {
 
     public static void showToast(Stage ownerStage, String message, int durationInMillis, double x, double y) {

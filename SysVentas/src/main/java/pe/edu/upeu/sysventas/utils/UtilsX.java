@@ -9,20 +9,21 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
 
+// Esta clase lee archivios y carpetas
 public class UtilsX {
 
     public URL getFile(String ruta) {
         return this.getClass().getResource("/" + ruta);
     }
 
-    public File getFileExterno(String carpeta, String filex) {
+    public File getFileExterno(String carpeta, String filex) { //lee archivo que esta en una determinada carpeta
         File newFolder = new File(carpeta);
         String ruta = newFolder.getAbsolutePath();
         Path CAMINO = Paths.get(ruta + "/" + filex);
         return CAMINO.toFile();
     }
 
-    public File getFolderExterno(String carpeta) {
+    public File getFolderExterno(String carpeta) { //para leer el contenido de una carpeta y tambhiuen identificar
         File newFolder = new File(carpeta);
         String ruta = newFolder.getAbsolutePath();
         Path CAMINO = Paths.get(ruta + "/");
@@ -45,7 +46,7 @@ public class UtilsX {
         return myresourcesx;
     }
 
-    public String readLanguageFile() {
+    public String readLanguageFile() { //lee un archivo properties
         Properties myresourcesx = new Properties();
         String idioma = "";
         try {
@@ -53,7 +54,7 @@ public class UtilsX {
                     getFileExterno("language", "SysCenterLife.properties").getAbsolutePath());
             try {
                 myresourcesx.load(in);
-                idioma = myresourcesx.getProperty("syscenterlife.idioma");
+                idioma = myresourcesx.getProperty("syscenterlife.idioma"); //bucas una propiedad  un archivo properties
             } catch (IOException e) {
                 e.printStackTrace();
             }

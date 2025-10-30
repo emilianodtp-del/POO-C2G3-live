@@ -16,7 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.mindrot.jbcrypt.BCrypt;
+
 
 @Builder
 @NoArgsConstructor
@@ -28,31 +28,15 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "id_usuario")
     private Long idUsuario;
-
     @Column(name = "user", nullable = false, unique = true, length = 20)
     private String user;
-
     @Column(name = "clave", nullable = false, length = 100)
     private String clave;
-
     @Column(name = "estado", nullable = false, length = 10)
     private String estado;
-
     @JoinColumn(name = "id_perfil", referencedColumnName = "id_perfil")
-
     @ManyToOne(optional = false)
     private Perfil idPerfil;
-
-    //Setter personalizado para encriptar automáticamente la contraseña
-    public void setClave(String clave) {
-        if (clave != null && !clave.startsWith("$2a$")) {
-            // Verifica que no esté ya encriptada (BCrypt siempre empieza con "$2a$")
-            this.clave = BCrypt.hashpw(clave, BCrypt.gensalt());
-        } else {
-            this.clave = clave;
-        }
-    }
 }

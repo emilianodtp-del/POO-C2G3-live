@@ -42,13 +42,13 @@ public class LoginController {
     Button btnIngresar;
 
     @FXML
-    public void cerrar(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    public void cerrar(ActionEvent event) { //este metodo se encarga de cerrar la ventana del fxml
+        Stage stage = (Stage) ((Node)
+                event.getSource()).getScene().getWindow();
         stage.close();
         Platform.exit();
         System.exit(0);
     }
-
 
     @FXML
     public void login(ActionEvent event) throws IOException {
@@ -59,7 +59,7 @@ public class LoginController {
                 SessionManager.getInstance().setUserName(usu.getUser());
 
                 SessionManager.getInstance().setUserPerfil(usu.getIdPerfil().getNombre());
-                FXMLLoader loader = new  FXMLLoader(getClass().getResource("/view/maingui.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/maingui.fxml"));
                 loader.setControllerFactory(context::getBean);
                 Parent mainRoot = loader.load();
                 Screen screen = Screen.getPrimary();

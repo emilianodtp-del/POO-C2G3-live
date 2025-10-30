@@ -43,6 +43,7 @@ public class VentaServiceImp extends CrudGenericoServiceImp<Venta, Long> impleme
                 CAMINO.toAbsolutePath().toFile());
         return CAMINO.toFile();
     }
+
     @Override
     public JasperPrint runReport(Long idv) throws JRException, SQLException
     {
@@ -66,5 +67,7 @@ public class VentaServiceImp extends CrudGenericoServiceImp<Venta, Long> impleme
         return JasperFillManager.fillReport(jreport, param,
                 dataSource.getConnection());
     }
+
+
 
 }
