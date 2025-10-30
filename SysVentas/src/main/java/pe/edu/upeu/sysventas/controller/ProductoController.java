@@ -57,10 +57,10 @@ public class ProductoController {
     @Autowired
     ICategoriaService cs;
     @Autowired
-    IUnidadMedidaService ums;
+    ProductoIService ps;
 
     @Autowired
-    ProductoIService ps;
+    IUnidadMedidaService ums;
 
     private Validator validator;
     ObservableList<Producto> listarProducto;
@@ -347,5 +347,7 @@ public class ProductoController {
             mostrarErroresValidacion(violacionesOrdenadas);
         }
     }
+
+
 
 }

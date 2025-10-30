@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 
 import java.util.SortedSet;
 
+// Esta clase me sirve para mostrar alternativas ala hora de usar el buscador como tambien hacer el autocompletado
 public class AutoCompleteTextField<T>{
 
     private TextField autoCompleteTextField;

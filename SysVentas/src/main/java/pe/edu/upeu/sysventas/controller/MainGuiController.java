@@ -1,5 +1,6 @@
 package pe.edu.upeu.sysventas.controller;
 
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -26,7 +27,6 @@ import java.util.prefs.Preferences;
 
 @Controller
 public class MainGuiController {
-
     @Autowired
     private ApplicationContext context;
     Preferences userPrefs = Preferences.userRoot();
@@ -44,6 +44,7 @@ public class MainGuiController {
     private Parent parent;
     Stage stage;
 
+    //Aqui declaramos un menu para cambiar estilos y tambien idiomas
     @FXML
     private Menu menuEstilo=new Menu("Cambiar Estilo");
     ComboBox<String> comboBox = new ComboBox<>(
@@ -85,12 +86,10 @@ public class MainGuiController {
     }
 
     class MenuItemListener{
-
         Map<String, String[]> menuConfig;
         MenuItemListener(){
             menuConfig = mmiDao.accesosAutorizados(lista);
         }
-
         public void handle(ActionEvent e){
             String id = ((MenuItem) e.getSource()).getId();
             System.out.println("Menu seleccionado: " + id);
@@ -118,7 +117,6 @@ public class MainGuiController {
                 throw new RuntimeException("Error al cargar FXML: " + fxmlPath, e);
             }
         }
-
         private void redireccionar(String fxmlPath){
             tabPaneFx.getTabs().clear();
             try {
@@ -148,21 +146,26 @@ public class MainGuiController {
         escena.getStylesheets().clear();
         switch (estiloSeleccionado) {
             case "Estilo Oscuro":
+
                 escena.getStylesheets().add(getClass().getResource("/css/estilo-oscuro.css").toExternalForm());
                 break;
             case "Estilo Azul":
+
                 escena.getStylesheets().add(getClass().getResource("/css/estilo-azul.css").toExternalForm());
                 break;
             case "Estilo Verde":
+
                 escena.getStylesheets().add(getClass().getResource("/css/estilo-verde.css").toExternalForm());
                 break;
             case "Estilo Rosado":
+
                 escena.getStylesheets().add(getClass().getResource("/css/estilo-rosado.css").toExternalForm());
                 break;
             default: break;
         }
     }
 
+    //Contabilizar cuantos menus existen
     public int[] contarMenuMunuItem(List<MenuMenuItenTO> data) {
         int menui = 0, menuitem = 0;
         String menuN = "";
@@ -178,12 +181,12 @@ public class MainGuiController {
         return new int[]{menui, menuitem};
     }
 
+
     private List<MenuMenuItenTO> listaAccesos() {
         myresources = util.detectLanguage(userPrefs.get("IDIOMAX", "es"));
         return mmiDao.listaAccesos(SessionManager.getInstance().getUserPerfil(), myresources);
     }
-
-    private void graficarMenus() {
+    private void graficarMenus(){
         lista = listaAccesos();
         int[] mmi = contarMenuMunuItem(lista);
         Menu[] menu = new Menu[mmi[0]];
@@ -240,14 +243,15 @@ public class MainGuiController {
         String idiomaSeleccionado =
                 comboBoxIdioma.getSelectionModel().getSelectedItem();
         switch (idiomaSeleccionado) {
-            case "Español": userPrefs.put("IDIOMAX", "es"); break;
-            case "Ingles": userPrefs.put("IDIOMAX", "en"); break;
+            case "Español": userPrefs.put("IDIOMAX", "es");break;
+            case "Ingles": userPrefs.put("IDIOMAX", "en");break;
             case "Frances": userPrefs.put("IDIOMAX", "fr"); break;
             default: userPrefs.put("IDIOMAX", "es"); break;
         }
         System.out.println("Cambiando idioma a: " + idiomaSeleccionado);
         graficarMenus();
     }
+
 
 
 }

@@ -34,4 +34,5 @@ public class MarcaServiceImp extends CrudGenericoServiceImp<Marca, Long> impleme
         return listar;
     }
 
+
 }
