@@ -41,4 +41,6 @@ public class SysVentasApplication extends Application {
 		stage.setTitle("SysVentas SysCenterLife");
 		stage.show();
 	}
+
+
 }
