@@ -5,11 +5,13 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
 import pe.edu.upeu.sysventas.dto.PersonaDto;
 
 import java.io.IOException;
 
 //Esta clase lo que hace es buscar el DNI y vota los datos personales
+@Component
 public  class ConsultaDNI {
 
     public PersonaDto consultarDNI(String dni){
@@ -51,10 +53,8 @@ public  class ConsultaDNI {
     }
 
     public static void main(String[] args) {
-        ConsultaDNI c=new ConsultaDNI();
-        PersonaDto p=c.consultarDNI("43631917");
-        System.out.println(p.getDni()+" "+p.getNombre()
-                +"  "+p.getApellidoPaterno()+"  "+p.getApellidoMaterno());
+        ConsultaDNI p=new ConsultaDNI();
+        PersonaDto a=p.consultarDNI("43631917");
+        System.out.println(a.toString());
     }
-
 }
