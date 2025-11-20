@@ -31,5 +31,4 @@ public class VentCarritoServiceImp extends CrudGenericoServiceImp<VentCarrito, L
     public void deleteCarAll(String dniruc) {
         carritoRepository.deleteByDniruc(dniruc);
     }
-
 }

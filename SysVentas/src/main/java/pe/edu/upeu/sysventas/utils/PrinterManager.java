@@ -1,11 +1,8 @@
 package pe.edu.upeu.sysventas.utils;
 
-
 import javax.print.PrintService;
 import com.github.anastaciocintra.output.PrinterOutputStream;
 import java.io.IOException;
-
-
 
 public class PrinterManager {
     private static PrinterManager instance;

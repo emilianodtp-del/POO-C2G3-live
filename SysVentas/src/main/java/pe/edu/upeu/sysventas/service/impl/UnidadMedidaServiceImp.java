@@ -19,7 +19,6 @@ public class UnidadMedidaServiceImp extends CrudGenericoServiceImp<UnidadMedida,
     protected ICrudGenericoRepository<UnidadMedida, Long> getRepo() {
         return unidadMedidaRepository;
     }
-
     @Override
     public List<ComboBoxOption> listarCombobox() {
         List<ComboBoxOption> listar=new ArrayList<>();

@@ -14,8 +14,8 @@ import javafx.util.Callback;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Consumer;
-// Sirve para el reporte de las tablitas
-public class TableViewHelper<T> { // todo <T> comcepto de generico
+
+public class TableViewHelper<T> {
 
     public void addColumnsInOrderWithSize(TableView<T> tableView, LinkedHashMap<String, ColumnInfo> columns, Consumer<T> updateAction, Consumer<T> deleteAction) {
         for (Map.Entry<String, ColumnInfo> entry : columns.entrySet()) {

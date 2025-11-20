@@ -45,7 +45,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 		<!-- Librerias para DB -->
 		<dependency>
 			<groupId>org.xerial</groupId>
@@ -73,7 +72,6 @@
 		</dependency>
 
 		<!-- Validaciones campos -->
-
 		<dependency>
 			<groupId>jakarta.validation</groupId>
 			<artifactId>jakarta.validation-api</artifactId>
@@ -97,18 +95,19 @@
 			<artifactId>jackson-annotations</artifactId>
 			<version>2.20</version>
 		</dependency>
-
 		<!-- Jasperreport -->
 		<dependency>
 			<groupId>com.miglayout</groupId>
 			<artifactId>miglayout</artifactId>
 			<version>3.7.4</version>
 		</dependency>
+
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
 			<version>6.21.5</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-swing</artifactId>
@@ -144,21 +143,19 @@
 			<version>2.2.4</version>
 		</dependency>
 
+		<!-- Ticketera POS -->
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-crypto</artifactId>
+			<groupId>com.github.anastaciocintra</groupId>
+			<artifactId>escpos-coffee</artifactId>
+			<version>4.1.0</version>
 		</dependency>
-        <!-- Ticketera POS -->
-        <dependency>
-            <groupId>com.github.anastaciocintra</groupId>
-            <artifactId>escpos-coffee</artifactId>
-            <version>4.1.0</version>
-        </dependency>
+
 
 	</dependencies>
 
 	<build>
 		<plugins>
+			<!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -169,8 +166,9 @@
 							<artifactId>lombok</artifactId>
 						</path>
 					</annotationProcessorPaths>
+
 				</configuration>
-			</plugin>
+			</plugin> -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -181,6 +179,7 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+					<mainClass>pe.edu.upeu.sysventas.RunJavaFx</mainClass>
 				</configuration>
 			</plugin>
 		</plugins>

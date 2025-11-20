@@ -15,8 +15,7 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 @Service
-public class CategoriaServiceImp extends CrudGenericoServiceImp<Categoria, Long> implements ICategoriaService {
-
+public class CategoriaServiceImp extends CrudGenericoServiceImp<Categoria,Long> implements ICategoriaService {
     private final CategoriaRepository categoriaRepository;
 
     @Override

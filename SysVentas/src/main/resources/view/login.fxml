@@ -10,13 +10,13 @@
     <children>
         <AnchorPane AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
         <AnchorPane layoutX="14.0" layoutY="70.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
-         <children>
-            <ImageView fitHeight="90.0" fitWidth="95.0" layoutX="116.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/Icono-tienda.png" />
-               </image>
-            </ImageView>
-         </children></AnchorPane>
+            <children>
+                <ImageView fitHeight="90.0" fitWidth="95.0" layoutX="116.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../img/Icono-tienda.png" />
+                    </image>
+                </ImageView>
+            </children></AnchorPane>
         <AnchorPane layoutX="14.0" layoutY="216.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
             <children>
                 <AnchorPane layoutY="1.0" prefHeight="70.0" prefWidth="322.0" style="-fx-border-color: rgba(16,15,15,0); -fx-border-radius: 2;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -31,14 +31,14 @@
                                 <Image url="@../img/user.png" />
                             </image>
                         </ImageView>
-                    <Label layoutX="104.0" layoutY="1.0" text="Iniciar Seción" textFill="#3a3a3a">
-                        <font>
-                            <Font name="System Bold" size="18.0" />
-                        </font>
-                        <padding>
-                            <Insets right="20.0" />
-                        </padding>
-                    </Label>
+                        <Label layoutX="104.0" layoutY="1.0" text="Iniciar Seción" textFill="#3a3a3a">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                            <padding>
+                                <Insets right="20.0" />
+                            </padding>
+                        </Label>
                     </children>
                     <opaqueInsets>
                         <Insets />

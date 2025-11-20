@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="miContenedor"
+            maxHeight="1.7976931348623157E308"
+            maxWidth="1.7976931348623157E308"
+            prefHeight="510.0" prefWidth="1145.0"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="pe.edu.upeu.sysventas.controller.ClienteController">
+
+    <children>
+        <VBox layoutX="14" layoutY="14"
+              AnchorPane.bottomAnchor="5" AnchorPane.leftAnchor="5"
+              AnchorPane.rightAnchor="5" AnchorPane.topAnchor="5">
+
+            <children>
+                <!-- TÍTULO Y FILTRO -->
+                <AnchorPane>
+                    <children>
+                        <Label layoutX="14" layoutY="14" text="Gestionar Cliente">
+                            <font><Font name="System Bold" size="18" /></font>
+                        </Label>
+
+                        <Label layoutX="332" layoutY="41" text="Filtrar Cliente" />
+                        <TextField fx:id="txtFiltroDato" layoutX="332" layoutY="61"
+                                   prefHeight="26" prefWidth="191" />
+
+                        <Button layoutX="531" layoutY="61"
+                                mnemonicParsing="false"
+                                styleClass="btn, btn-lg, btn-success"
+                                text="Buscar" />
+
+                        <Label fx:id="idPrueba" layoutX="605" layoutY="66" text="" />
+                    </children>
+                    <padding><Insets bottom="5" /></padding>
+                </AnchorPane>
+
+                <!-- FORMULARIO + TABLA -->
+                <HBox maxHeight="1.7976931348623157E308"
+                      maxWidth="1.7976931348623157E308">
+
+                    <children>
+                        <!-- PANEL DEL FORMULARIO -->
+                        <AnchorPane styleClass="panel-success">
+                            <children>
+                                <GridPane layoutY="5">
+
+                                    <!-- COLUMNAS -->
+                                    <columnConstraints>
+                                        <ColumnConstraints prefWidth="140" />
+                                        <ColumnConstraints prefWidth="180" />
+                                        <ColumnConstraints prefWidth="120" />
+                                        <ColumnConstraints prefWidth="120" />
+                                    </columnConstraints>
+
+                                    <!-- FILAS -->
+                                    <rowConstraints>
+                                        <RowConstraints prefHeight="30" />
+                                        <RowConstraints prefHeight="30" />
+                                        <RowConstraints prefHeight="30" />
+                                        <RowConstraints prefHeight="30" />
+                                        <RowConstraints prefHeight="30" />
+                                        <RowConstraints prefHeight="40" />
+                                        <RowConstraints prefHeight="30" />
+                                    </rowConstraints>
+
+                                    <children>
+
+                                        <!-- TÍTULO FORMULARIO -->
+                                        <Label alignment="CENTER"
+                                               text="Formulario Cliente"
+                                               GridPane.columnSpan="4"
+                                               GridPane.halignment="CENTER">
+                                            <font><Font name="System Bold" size="12" /></font>
+                                        </Label>
+
+                                        <!-- DNI/RUC -->
+                                        <Label text="DNI/RUC" GridPane.rowIndex="1">
+                                            <GridPane.margin><Insets left="5" /></GridPane.margin>
+                                        </Label>
+                                        <TextField fx:id="txtDniRuc"
+                                                   GridPane.columnIndex="1"
+                                                   GridPane.columnSpan="3"
+                                                   GridPane.rowIndex="1">
+                                            <GridPane.margin><Insets right="5" /></GridPane.margin>
+                                        </TextField>
+
+                                        <!-- NOMBRES -->
+                                        <Label text="Nombres" GridPane.rowIndex="2">
+                                            <GridPane.margin><Insets left="5" /></GridPane.margin>
+                                        </Label>
+                                        <TextField fx:id="txtNombres"
+                                                   GridPane.columnIndex="1"
+                                                   GridPane.columnSpan="3"
+                                                   GridPane.rowIndex="2">
+                                            <GridPane.margin><Insets right="5" /></GridPane.margin>
+                                        </TextField>
+
+                                        <!-- REPRESENTANTE LEGAL -->
+                                        <Label text="Rep. Legal" GridPane.rowIndex="3">
+                                            <GridPane.margin><Insets left="5" /></GridPane.margin>
+                                        </Label>
+                                        <TextField fx:id="txtRepLegal"
+                                                   GridPane.columnIndex="1"
+                                                   GridPane.columnSpan="3"
+                                                   GridPane.rowIndex="3">
+                                            <GridPane.margin><Insets right="5" /></GridPane.margin>
+                                        </TextField>
+
+                                        <!-- TIPO DOCUMENTO -->
+                                        <Label text="Tipo Documento" GridPane.rowIndex="4">
+                                            <GridPane.margin><Insets left="5" /></GridPane.margin>
+                                        </Label>
+                                        <ComboBox fx:id="cbxTipoDocumento"
+                                                  GridPane.columnIndex="1"
+                                                  GridPane.columnSpan="3"
+                                                  GridPane.rowIndex="4">
+                                            <GridPane.margin><Insets right="5" /></GridPane.margin>
+                                        </ComboBox>
+
+                                        <!-- BOTONES -->
+                                        <Button text="Guardar"
+                                                onAction="#validarFormulario"
+                                                styleClass="btn, btn-lg, btn-primary"
+                                                maxWidth="1.7976931348623157E308"
+                                                GridPane.columnIndex="1"
+                                                GridPane.rowIndex="5">
+                                            <GridPane.margin><Insets top="5" bottom="5"/></GridPane.margin>
+                                        </Button>
+
+                                        <Button text="Cancelar"
+                                                styleClass="btn, btn-lg, btn-danger"
+                                                maxWidth="1.7976931348623157E308"
+                                                GridPane.columnIndex="2"
+                                                GridPane.rowIndex="5">
+                                            <GridPane.margin><Insets left="5" top="5" bottom="5"/></GridPane.margin>
+                                        </Button>
+
+                                        <!-- MENSAJES -->
+                                        <Label fx:id="lbnMsg"
+                                               text=""
+                                               GridPane.columnSpan="4"
+                                               GridPane.rowIndex="6">
+                                            <GridPane.margin><Insets left="5" top="5"/></GridPane.margin>
+                                        </Label>
+
+                                    </children>
+                                </GridPane>
+                            </children>
+                        </AnchorPane>
+
+                        <!-- TABLA -->
+                        <AnchorPane>
+                            <children>
+                                <TableView fx:id="tableView"
+                                           AnchorPane.leftAnchor="5"
+                                           AnchorPane.rightAnchor="5"
+                                           AnchorPane.topAnchor="5"
+                                           AnchorPane.bottomAnchor="5" />
+                            </children>
+                        </AnchorPane>
+                    </children>
+
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
+

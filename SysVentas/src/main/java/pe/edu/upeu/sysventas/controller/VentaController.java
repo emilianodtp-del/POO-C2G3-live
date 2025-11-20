@@ -11,7 +11,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import pe.edu.upeu.sysventas.components.*;
@@ -20,7 +19,10 @@ import pe.edu.upeu.sysventas.dto.PersonaDto;
 import pe.edu.upeu.sysventas.dto.SessionManager;
 import pe.edu.upeu.sysventas.enums.TipoDocumento;
 import pe.edu.upeu.sysventas.exception.ModelNotFoundException;
-import pe.edu.upeu.sysventas.model.*;
+import pe.edu.upeu.sysventas.model.Cliente;
+import pe.edu.upeu.sysventas.model.VentCarrito;
+import pe.edu.upeu.sysventas.model.Venta;
+import pe.edu.upeu.sysventas.model.VentaDetalle;
 import pe.edu.upeu.sysventas.service.*;
 import pe.edu.upeu.sysventas.utils.ConsultaDNI;
 import pe.edu.upeu.sysventas.utils.PrinterManager;
@@ -31,6 +33,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.function.Consumer;
+
 @Controller
 public class VentaController {
 
@@ -120,7 +123,8 @@ public class VentaController {
         txtImporteT.setText(String.valueOf(impoTotal));
         double pv = impoTotal / 1.18;
         txtBaseImp.setText(String.valueOf(Math.round(pv * 100.0) / 100.0));
-        txtIgv.setText(String.valueOf(Math.round((pv * 0.18) * 100.0) / 100.0));
+        txtIgv.setText(String.valueOf(Math.round((pv * 0.18) * 100.0) /
+                100.0));
         tableView.getItems().addAll(lista);
     }
 
@@ -128,7 +132,7 @@ public class VentaController {
         PersonaDto p=cDni.consultarDNI(autocompCliente.getText());
         if(p!=null){
             razonSocial.setText(p.getNombre()+" "+p.getApellidoPaterno()+" "+p.getApellidoMaterno());
-            dniRuc.setText(p.getDni());
+                    dniRuc.setText(p.getDni());
             btnRegCliente.setDisable(false);
             Toast.showToast(stage, "El cliente se encontró en RENIEC para registrar debe hacer clik en Add", 2000, with, 50);
         }else{
@@ -167,9 +171,9 @@ public class VentaController {
         alert.setTitle("Confirmación");
         alert.setHeaderText("Confirmar acción");
         alert.setContentText("¿Estás seguro de que deseas eliminar este elemento?");
-        Optional<ButtonType> result = alert.showAndWait();
+                Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            daoC.deleteByid(obj.getIdCarrito());
+            daoC.delete(obj.getIdCarrito());
             Stage stage = StageManager.getPrimaryStage();
             double with=stage.getMaxWidth()/2;
             Toast.showToast(stage, "¡Acción completada!", 2000, with, 50);
@@ -198,6 +202,7 @@ public class VentaController {
 
         tableView.setTableMenuButtonVisible(true);
     }
+
 
     @FXML
     public void initialize(){

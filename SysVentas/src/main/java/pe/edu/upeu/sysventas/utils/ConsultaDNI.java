@@ -10,7 +10,6 @@ import pe.edu.upeu.sysventas.dto.PersonaDto;
 
 import java.io.IOException;
 
-//Esta clase lo que hace es buscar el DNI y vota los datos personales
 @Component
 public  class ConsultaDNI {
 
@@ -52,9 +51,11 @@ public  class ConsultaDNI {
         return personaDto;
     }
 
+
     public static void main(String[] args) {
-        ConsultaDNI p=new ConsultaDNI();
-        PersonaDto a=p.consultarDNI("43631917");
-        System.out.println(a.toString());
+        ConsultaDNI c=new ConsultaDNI();
+       PersonaDto p= c.consultarDNI("43631917");
+        System.out.println(p.getDni()+" "+p.getNombre()+"  "+p.getApellidoPaterno()+"  "+p.getApellidoMaterno());
     }
+
 }

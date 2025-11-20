@@ -42,5 +42,4 @@ public class ClienteServiceImp extends CrudGenericoServiceImp<Cliente,String> im
         return listarclientes;
     }
 
-
 }

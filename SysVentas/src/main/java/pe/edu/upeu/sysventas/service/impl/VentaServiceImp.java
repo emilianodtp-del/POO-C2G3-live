@@ -24,10 +24,10 @@ import java.util.HashMap;
  @Service
 public class VentaServiceImp extends CrudGenericoServiceImp<Venta, Long> implements IVentaService {
 
+    private final VentaRepository ventaRepository;
+
     @Autowired
     private DataSource dataSource;
-
-    private final VentaRepository ventaRepository;
 
     @Override
     protected ICrudGenericoRepository<Venta, Long> getRepo() {
@@ -46,8 +46,7 @@ public class VentaServiceImp extends CrudGenericoServiceImp<Venta, Long> impleme
     }
 
     @Override
-    public JasperPrint runReport(Long idv) throws JRException, SQLException
-    {
+    public JasperPrint runReport(Long idv) throws JRException, SQLException{
         // Verificar si la venta existe
         if (!ventaRepository.existsById(idv)) {
             throw new IllegalArgumentException("La venta con id " + idv + " no existe");
@@ -66,7 +65,31 @@ public class VentaServiceImp extends CrudGenericoServiceImp<Venta, Long> impleme
         JasperReport jreport = JasperCompileManager.compileReport(jdesign);
         // Llenar el informe
         try (Connection conn = dataSource.getConnection()) {
+            //return JasperFillManager.fillReport(jreport, param, conn);
+            return JasperFillManager.fillReport(jreport, param,
+                    dataSource.getConnection());
+        }
+    }
+
+    @Override
+    public JasperPrint runReportVentas(String fInicio, String ffinal) throws
+            JRException, SQLException {
+        HashMap<String, Object> param = new HashMap<>();
+        // Obtener ruta de la imagen
+        String imgen = getFile("logoupeu.png").getAbsolutePath();
+        // Agregar parámetros
+        param.put("fechaI", fInicio);
+        param.put("imagenurl", imgen);
+        param.put("fechaF", ffinal);
+        // Cargar el diseño del informe
+        JasperDesign jdesign =
+                JRXmlLoader.load(getFile("reporte_venta.jrxml"));
+        JasperReport jreport = JasperCompileManager.compileReport(jdesign);
+        try (Connection conn = dataSource.getConnection()) {
             return JasperFillManager.fillReport(jreport, param, conn);
         }
     }
+
+
+
 }

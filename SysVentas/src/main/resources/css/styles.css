@@ -3,3 +3,17 @@
     -fx-border-width: 2px;
     -fx-background-color: #ffeeee;
 }
+.btn-primary {
+    -fx-background-color: #2980b9;
+    -fx-text-fill: white;
+}
+
+.btn-success {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+}
+
+.btn-danger {
+    -fx-background-color: #c0392b;
+    -fx-text-fill: white;
+}
