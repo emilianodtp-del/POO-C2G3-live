@@ -38,12 +38,10 @@ public class ProductoServiceImp implements ProductoIService {
         return pRepo.findById(id).orElse(null);
     }
     @Override
-    public List<ModeloDataAutocomplet> listAutoCompletProducto(String
-                                                                       nombre) {
+    public List<ModeloDataAutocomplet> listAutoCompletProducto(String nombre) {
         List<ModeloDataAutocomplet> listarProducto = new ArrayList<>();
         try {
-            for (Producto producto :
-                    pRepo.listAutoCompletProducto(nombre + "%")) {
+            for (Producto producto : pRepo.listAutoCompletProducto(nombre + "%")) {
                 ModeloDataAutocomplet data = new ModeloDataAutocomplet();data.setIdx(producto.getNombre());
                 data.setNameDysplay(String.valueOf(producto.getIdProducto()));
                 data.setOtherData(producto.getPu() + ":" +
