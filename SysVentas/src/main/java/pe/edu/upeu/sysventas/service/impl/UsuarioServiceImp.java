@@ -20,4 +20,5 @@ public class UsuarioServiceImp extends CrudGenericoServiceImp<Usuario, Long> imp
         return usuarioRepository.loginUsuario(user, clave);
     }
 
+
 }

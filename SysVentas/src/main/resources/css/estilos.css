@@ -1,0 +1,49 @@
+.panel-top {
+    -fx-background-color: #f1f7ff;
+    -fx-padding: 10;
+    -fx-border-color: #c3d7f5;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-effect: dropshadow(one-pass-box, #d6e6ff, 4, 0, 0, 1);
+}
+
+.panel-form {
+    -fx-background-color: #ffffff;
+    -fx-padding: 10;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-effect: dropshadow(one-pass-box, #cccccc, 4, 0, 0, 1);
+}
+
+.panel-table {
+    -fx-background-color: #ffffff;
+    -fx-padding: 8;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.btnBuscar {
+    -fx-background-color: #5cc2ff;
+    -fx-background-radius: 6;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 6 12;
+}
+
+.btnGuardar {
+    -fx-background-color: #287bff;
+    -fx-background-radius: 6;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8 15;
+}
+
+.btnCancelar {
+    -fx-background-color: #ff4d4d;
+    -fx-background-radius: 6;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8 15;
+}

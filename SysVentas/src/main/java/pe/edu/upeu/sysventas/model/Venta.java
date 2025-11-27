@@ -4,7 +4,6 @@
  */
 package pe.edu.upeu.sysventas.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -35,16 +34,16 @@ public class Venta {
     @ManyToOne
     @JoinColumn(name = "dniruc", referencedColumnName = "dniruc",
             nullable = false, foreignKey = @ForeignKey(name
-                    = "FK_CLIENTE_VENTA"))
+            = "FK_CLIENTE_VENTA"))
     private Cliente cliente;
     @ManyToOne
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario",
             nullable = false, foreignKey = @ForeignKey(name
-                    = "FK_USUARIO_VENTA"))
+            = "FK_USUARIO_VENTA"))
     private Usuario usuario;
     @Column(name = "num_doc", nullable = false, length = 20)
     private String numDoc;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "fecha_gener", nullable = false)
     private LocalDateTime fechaGener;
     @Column(name = "serie", nullable = false, length = 20)
@@ -55,3 +54,4 @@ public class Venta {
             = true, fetch = FetchType.EAGER)
     private List<VentaDetalle> ventaDetalles;
 }
+

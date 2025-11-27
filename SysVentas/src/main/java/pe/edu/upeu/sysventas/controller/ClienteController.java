@@ -1,288 +1,236 @@
 package pe.edu.upeu.sysventas.controller;
 
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import javafx.util.Duration;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import pe.edu.upeu.sysventas.components.ColumnInfo;
-import pe.edu.upeu.sysventas.components.ComboBoxAutoComplete;
 import pe.edu.upeu.sysventas.components.TableViewHelper;
-import pe.edu.upeu.sysventas.components.Toast;
-import pe.edu.upeu.sysventas.dto.ComboBoxOption;
+import pe.edu.upeu.sysventas.enums.TipoDocumento;
 import pe.edu.upeu.sysventas.model.Cliente;
 import pe.edu.upeu.sysventas.service.IClienteService;
 
 import java.util.*;
-import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
-@Controller
+@RequiredArgsConstructor
+@Component
 public class ClienteController {
 
-    @FXML
-    TextField txtDniRuc, txtNombres, txtRepLegal, txtFiltroDato;
+    private final IClienteService clienteService;
 
-    @FXML
-    ComboBox<ComboBoxOption> cbxTipoDocumento;
+    @FXML private TextField txtDniRuc;
+    @FXML private TextField txtNombres;
+    @FXML private TextField txtRepLegal;
+    @FXML private ComboBox<TipoDocumento> cbxTipoDocumento;
+    @FXML private TableView<Cliente> tableView;
+    @FXML private TextField txtFiltroDato;
+    @FXML private Label lbnMsg;
 
-    @FXML
-    private TableView<Cliente> tableView;
+    private final TableViewHelper<Cliente> tableHelper = new TableViewHelper<>();
+    private ObservableList<Cliente> listaClientes = FXCollections.observableArrayList();
 
-    @FXML
-    Label lbnMsg, idPrueba;
-
-    @FXML
-    private AnchorPane miContenedor;
-
-    Stage stage;
-
-    @Autowired
-    IClienteService clienteService;
-
-    private Validator validator;
-
-    ObservableList<Cliente> listarCliente;
-
-    Cliente formulario;
-    String idClienteCE;
-
-    private void filtrarClientes(String filtro) {
-        if (filtro == null || filtro.isEmpty()) {
-            tableView.getItems().clear();
-            tableView.getItems().addAll(listarCliente);
-        } else {
-            String lowerCaseFilter = filtro.toLowerCase();
-
-            List<Cliente> filtrados = listarCliente.stream()
-                    .filter(c -> {
-                        if (c.getDniruc().toLowerCase().contains(lowerCaseFilter)) return true;
-                        if (c.getNombres().toLowerCase().contains(lowerCaseFilter)) return true;
-                        if (c.getRepLegal() != null && c.getRepLegal().toLowerCase().contains(lowerCaseFilter)) return true;
-                        if (c.getTipoDocumento() != null && c.getTipoDocumento().name().toLowerCase().contains(lowerCaseFilter)) return true;
-                        return false;
-                    })
-                    .toList();
-
-            tableView.getItems().clear();
-            tableView.getItems().addAll(filtrados);
-        }
-    }
-
-
-
-    public void listar() {
-        try {
-            tableView.getItems().clear();
-            listarCliente = FXCollections.observableArrayList(clienteService.findAll());
-            tableView.getItems().addAll(listarCliente);
-
-            txtFiltroDato.textProperty().addListener((o, ov, nv) -> filtrarClientes(nv));
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+    private String dniEditar = null;
 
     @FXML
     public void initialize() {
+        cargarComboTipoDocumento();
+        cargarTabla();
+        listarClientes();
 
-        // Obtener stage después de que cargue el AnchorPane
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), event -> {
-            stage = (Stage) miContenedor.getScene().getWindow();
-        }));
-        timeline.setCycleCount(1);
-        timeline.play();
+        if (txtFiltroDato != null) {
+            txtFiltroDato.textProperty().addListener((obs, oldVal, newVal) -> filtrarClientes(newVal));
+        }
+    }
 
-        // Llenar ComboBox Tipo Doc
-        try {
-            ObservableList<ComboBoxOption> opciones = FXCollections.observableArrayList();
-            for (pe.edu.upeu.sysventas.enums.TipoDocumento td : pe.edu.upeu.sysventas.enums.TipoDocumento.values()) {
-                opciones.add(new ComboBoxOption(td.name(), td.name()));
-            }
-            cbxTipoDocumento.setItems(opciones);
-        } catch (Exception ex) {
-            System.out.println("Error cargando Tipo Documento: " + ex.getMessage());
-            cbxTipoDocumento.setItems(FXCollections.observableArrayList());
+    // ============================
+    //       FILTRO LISTA
+    // ============================
+    private void filtrarClientes(String filtro) {
+        if (filtro == null || filtro.trim().isEmpty()) {
+            tableView.setItems(listaClientes);
+            return;
         }
 
-        cbxTipoDocumento.setOnAction(event -> {
-            ComboBoxOption selected = cbxTipoDocumento.getSelectionModel().getSelectedItem();
-            if (selected != null) {
-                System.out.println("ID Tipo Documento: " + selected.getKey());
-            }
-        });
+        String lower = filtro.toLowerCase();
 
-        new ComboBoxAutoComplete<>(cbxTipoDocumento);
+        List<Cliente> filtrados = listaClientes.stream()
+                .filter(c ->
+                        c.getDniruc().toLowerCase().contains(lower) ||
+                                c.getNombres().toLowerCase().contains(lower) ||
+                                c.getRepLegal().toLowerCase().contains(lower)
+                )
+                .collect(Collectors.toList());
 
-        // VALIDADOR
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        validator = factory.getValidator();
-
-        // TABLA
-        TableViewHelper<Cliente> helper = new TableViewHelper<>();
-
-        LinkedHashMap<String, ColumnInfo> columns = new LinkedHashMap<>();
-        columns.put("DNI/RUC", new ColumnInfo("dniruc", 120.0));
-        columns.put("Nombres", new ColumnInfo("nombres", 200.0));
-        columns.put("Rep. Legal", new ColumnInfo("repLegal", 200.0));
-        columns.put("Tipo Doc.", new ColumnInfo("tipoDocumento", 150.0));
-
-        Consumer<Cliente> updateAction = cliente -> editForm(cliente);
-
-        Consumer<Cliente> deleteAction = cliente -> {
-            clienteService.delete(cliente.getDniruc());
-            double w = stage.getWidth() / 1.5;
-            double h = stage.getHeight() / 2;
-            Toast.showToast(stage, "Cliente eliminado correctamente!!", 2000, w, h);
-            listar();
-        };
-
-        helper.addColumnsInOrderWithSize(tableView, columns, updateAction, deleteAction);
-        tableView.setTableMenuButtonVisible(true);
-
-        listar();
+        tableView.setItems(FXCollections.observableArrayList(filtrados));
     }
 
-    public void limpiarError() {
-        List<Control> controles = List.of(txtDniRuc, txtNombres, txtRepLegal, cbxTipoDocumento);
-        controles.forEach(c -> c.getStyleClass().remove("text-field-error"));
+    // ============================
+    //        CARGA COMBO
+    // ============================
+    private void cargarComboTipoDocumento() {
+        cbxTipoDocumento.setItems(FXCollections.observableArrayList(TipoDocumento.values()));
     }
 
+    // ============================
+    //         TABLA
+    // ============================
+    private void cargarTabla() {
+        LinkedHashMap<String, ColumnInfo> columnas = new LinkedHashMap<>();
+        columnas.put("DNI/RUC", new ColumnInfo("dniruc", 120.0));
+        columnas.put("Nombres", new ColumnInfo("nombres", 200.0));
+        columnas.put("Rep. Legal", new ColumnInfo("repLegal", 200.0));
+        columnas.put("Tipo Doc.", new ColumnInfo("tipoDocumento", 120.0));
+
+        tableHelper.addColumnsInOrderWithSize(
+                tableView,
+                columnas,
+                this::cargarDataEnFormulario,
+                this::eliminarCliente
+        );
+    }
+
+    private void listarClientes() {
+        listaClientes.setAll(clienteService.findAll());
+        tableView.setItems(listaClientes);
+    }
+
+
+    @FXML
     public void clearForm() {
+        limpiarError();
+
         txtDniRuc.clear();
         txtNombres.clear();
         txtRepLegal.clear();
         cbxTipoDocumento.getSelectionModel().clearSelection();
-        idClienteCE = null;
-        limpiarError();
+
+        lbnMsg.setText("Formulario limpiado correctamente");
     }
 
-    private void editForm(Cliente cliente) {
-        if (cliente == null) { return; }
-        try {
-            // Cargar datos al formulario
-            if (txtDniRuc != null) txtDniRuc.setText(cliente.getDniruc());
-            if (txtNombres != null) txtNombres.setText(cliente.getNombres());
-            if (txtRepLegal != null) txtRepLegal.setText(cliente.getRepLegal());
-            idClienteCE = cliente.getDniruc();
+    public void limpiarError() {
+        // Lista de los controles reales del ClienteController
+        List<Control> controles = List.of(
+                txtDniRuc,
+                txtNombres,
+                txtRepLegal,
+                cbxTipoDocumento
+        );
 
-            // Seleccionar Tipo de Documento en el ComboBox
-            if (cbxTipoDocumento != null) {
-                if (cliente.getTipoDocumento() != null) {
-                    String key = cliente.getTipoDocumento().name();
-                    ObservableList<ComboBoxOption> items = cbxTipoDocumento.getItems();
-                    if (items != null) {
-                        for (ComboBoxOption opt : items) {
-                            if (key.equals(opt.getKey())) {
-                                cbxTipoDocumento.getSelectionModel().select(opt);
-                                break;
-                            }
-                        }
-                    }
-                } else {
-                    cbxTipoDocumento.getSelectionModel().clearSelection();
-                }
+        // Quita la clase de error
+        controles.forEach(c -> {
+            if (c != null) {
+                c.getStyleClass().remove("text-field-error");
             }
-        } catch (Exception ex) {
-            System.out.println("Error cargando formulario de cliente: " + ex.getMessage());
-        }
+        });
     }
 
-    private void mostrarErroresValidacion(List<ConstraintViolation<Cliente>> violaciones) {
-        limpiarError();
 
-        Map<String, Control> campos = new LinkedHashMap<>();
-        campos.put("dniruc", txtDniRuc);
-        campos.put("nombres", txtNombres);
-        campos.put("repLegal", txtRepLegal);
-        campos.put("tipoDocumento", cbxTipoDocumento);
+    // ============================
+    //     PASAR DATOS AL FORM
+    // ============================
+    private void cargarDataEnFormulario(Cliente c) {
+        dniEditar = c.getDniruc();
 
-        LinkedHashMap<String, String> erroresOrdenados = new LinkedHashMap<>();
-        final Control[] primerControl = {null};
+        txtDniRuc.setText(c.getDniruc());
+        txtNombres.setText(c.getNombres());
+        txtRepLegal.setText(c.getRepLegal());
+        cbxTipoDocumento.setValue(c.getTipoDocumento());
 
-        for (String campo : campos.keySet()) {
-            violaciones.stream()
-                    .filter(v -> v.getPropertyPath().toString().equals(campo))
-                    .findFirst()
-                    .ifPresent(v -> {
-                        erroresOrdenados.put(campo, v.getMessage());
-                        Control ctrl = campos.get(campo);
-
-                        if (!ctrl.getStyleClass().contains("text-field-error"))
-                            ctrl.getStyleClass().add("text-field-error");
-
-                        if (primerControl[0] == null) primerControl[0] = ctrl;
-                    });
-        }
-
-        if (!erroresOrdenados.isEmpty()) {
-            var error = erroresOrdenados.entrySet().iterator().next();
-            lbnMsg.setText(error.getValue());
-            lbnMsg.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
-
-            if (primerControl[0] != null) {
-                Platform.runLater(primerControl[0]::requestFocus);
-            }
-        }
+        limpiarErrores();
     }
 
-    private void procesarFormulario() {
-        lbnMsg.setText("Formulario válido");
-        lbnMsg.setStyle("-fx-text-fill: green; -fx-font-size: 16px;");
-        limpiarError();
+    // ============================
+    //      ELIMINAR CLIENTE
+    // ============================
+    private void eliminarCliente(Cliente c) {
+        clienteService.deleteById(c.getDniruc());
+        listarClientes();
 
-        double w = stage.getWidth() / 1.5;
-        double h = stage.getHeight() / 2;
-
-        if (idClienteCE != null && !idClienteCE.isEmpty()) {
-            // Actualizar usando el ID (dniruc) existente
-            clienteService.update(idClienteCE, formulario);
-            Toast.showToast(stage, "Cliente actualizado!!", 2000, w, h);
-        } else {
-            // Guardar nuevo cliente
-            clienteService.save(formulario);
-            Toast.showToast(stage, "Cliente guardado!!", 2000, w, h);
-        }
-
-        clearForm();
-        listar();
+        lbnMsg.setText("Cliente eliminado correctamente");
+        lbnMsg.setStyle("-fx-text-fill: green; -fx-font-size: 14px;");
     }
 
+    // ============================
+    //     VALIDACIÓN ESTILO USUARIO
+    // ============================
     @FXML
     public void validarFormulario() {
-        formulario = new Cliente();
-        formulario.setDniruc(txtDniRuc.getText());
-        formulario.setNombres(txtNombres.getText());
-        formulario.setRepLegal(txtRepLegal.getText());
+        limpiarErrores();
 
-        String idTD = cbxTipoDocumento.getSelectionModel().getSelectedItem() == null
-                ? "0"
-                : cbxTipoDocumento.getSelectionModel().getSelectedItem().getKey();
+        // Capturar datos
+        String dni = txtDniRuc.getText().trim();
+        String nombres = txtNombres.getText().trim();
+        String rep = txtRepLegal.getText().trim();
+        TipoDocumento tipo = cbxTipoDocumento.getValue();
 
-        formulario.setTipoDocumento(idTD.equals("0") ? null : pe.edu.upeu.sysventas.enums.TipoDocumento.valueOf(idTD));
-
-        Set<ConstraintViolation<Cliente>> violaciones = validator.validate(formulario);
-
-        List<ConstraintViolation<Cliente>> ordenadas =
-                violaciones.stream()
-                        .sorted(Comparator.comparing(v -> v.getPropertyPath().toString()))
-                        .toList();
-
-        if (ordenadas.isEmpty()) {
-            procesarFormulario();
-        } else {
-            mostrarErroresValidacion(ordenadas);
+        // Validaciones específicas con mensajes
+        if (dni.isEmpty()) {
+            marcarError(txtDniRuc, "El DNI/RUC no puede estar vacío");
+            return;
         }
+        if (nombres.isEmpty()) {
+            marcarError(txtNombres, "Los nombres no pueden estar vacíos");
+            return;
+        }
+        if (rep.isEmpty()) {
+            marcarError(txtRepLegal, "El representante legal no puede estar vacío");
+            return;
+        }
+        if (tipo == null) {
+            marcarError(cbxTipoDocumento, "Debe seleccionar un tipo de documento");
+            return;
+        }
+
+        // Crear objeto Cliente
+        Cliente cli = Cliente.builder()
+                .dniruc(dni)
+                .nombres(nombres)
+                .repLegal(rep)
+                .tipoDocumento(tipo)
+                .build();
+
+        // Registro o actualización
+        if (dniEditar != null) {
+            clienteService.update(dniEditar, cli);
+            lbnMsg.setText("Cliente actualizado correctamente");
+        } else {
+            clienteService.save(cli);
+            lbnMsg.setText("Cliente registrado correctamente");
+        }
+
+        lbnMsg.setStyle("-fx-text-fill: green; -fx-font-size: 16px;");
+        listarClientes();
+        limpiarFormulario();
+    }
+
+    // ============================
+    //     UTILIDADES DE ERRORES
+    // ============================
+    private void marcarError(Control control, String mensaje) {
+        if (!control.getStyleClass().contains("text-field-error")) {
+            control.getStyleClass().add("text-field-error");
+
+        }
+        lbnMsg.setText(mensaje);
+        lbnMsg.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
+
+        Platform.runLater(control::requestFocus);
+    }
+
+    private void limpiarErrores() {
+        List<Control> controles = List.of(txtDniRuc, txtNombres, txtRepLegal, cbxTipoDocumento);
+        controles.forEach(c -> c.getStyleClass().remove("text-field-error"));
+    }
+
+    private void limpiarFormulario() {
+        txtDniRuc.clear();
+        txtNombres.clear();
+        txtRepLegal.clear();
+        cbxTipoDocumento.getSelectionModel().clearSelection();
+        dniEditar = null;
     }
 }

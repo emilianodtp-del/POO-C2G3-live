@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="miContenedor" stylesheets="@/css/estilos.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.edu.upeu.sysventas.controller.StockController">
+
+    <children>
+
+        <VBox spacing="10" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
+
+            <!-- ======================================================
+                 SECCIÓN SUPERIOR: TÍTULO + BUSCADOR
+            ====================================================== -->
+            <AnchorPane styleClass="panel-top">
+                <children>
+
+                    <Label layoutX="14" layoutY="12" text="Gestión de Stock" textFill="DODGERBLUE">
+                        <font><Font name="System Bold" size="20" /></font>
+                    </Label>
+
+                    <Label layoutX="332" layoutY="48" text="Buscar Stock" />
+                    <TextField fx:id="txtFiltroDato" layoutX="332" layoutY="68" prefHeight="28" prefWidth="200" promptText="Buscar stock" />
+
+                    <Button layoutX="540" layoutY="67" mnemonicParsing="false" styleClass="btnBuscar" text="Buscar" />
+
+                </children>
+            </AnchorPane>
+
+            <!-- ======================================================
+                 SECCIÓN DEL FORMULARIO
+            ====================================================== -->
+            <AnchorPane styleClass="panel-form">
+                <children>
+
+                    <GridPane hgap="5" vgap="5">
+                        <padding>
+                            <Insets bottom="10" left="10" right="10" top="10" />
+                        </padding>
+
+                        <columnConstraints>
+                            <ColumnConstraints prefWidth="120.0" />
+                            <ColumnConstraints prefWidth="180.0" />
+                            <ColumnConstraints maxWidth="161.0" minWidth="125.0" prefWidth="161.0" />
+                            <ColumnConstraints maxWidth="145.0" minWidth="109.0" prefWidth="109.0" />
+                            <ColumnConstraints maxWidth="115.0" minWidth="89.0" prefWidth="100.0" />
+                            <ColumnConstraints maxWidth="181.0" minWidth="155.0" prefWidth="170.0" />
+                        </columnConstraints>
+
+                        <children>
+
+                            <!-- Título -->
+                            <Label text="Registro de Stock" GridPane.columnSpan="4" GridPane.halignment="CENTER">
+                                <font><Font name="System Bold" size="14" /></font>
+                            </Label>
+
+                            <!-- Nombre Stock -->
+                            <Label text="Nombre Stock" GridPane.rowIndex="1" />
+                            <TextField fx:id="txtNombreStock" prefHeight="25.0" prefWidth="405.0" promptText="Ingrese stock" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+
+                            <!-- Cantidad -->
+                            <Label text="Cantidad" GridPane.rowIndex="2" />
+                            <TextField fx:id="txtCantidad" promptText="Ingrese la cantidad" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                            <!-- Marca -->
+                            <Label text="Marca" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                        <opaqueInsets>
+                           <Insets />
+                        </opaqueInsets>
+                        <GridPane.margin>
+                           <Insets left="20.0" />
+                        </GridPane.margin></Label>
+                            <ComboBox fx:id="cbxMarca" prefHeight="26" prefWidth="177.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+
+                            <!-- Categoría -->
+                            <Label text="Categoría" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                        <GridPane.margin>
+                           <Insets left="20.0" />
+                        </GridPane.margin></Label>
+                            <ComboBox fx:id="cbxCategoria" prefHeight="26" prefWidth="150" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+
+                            <!-- Botones -->
+                            <Button onAction="#validarFormulario" prefHeight="33.0" prefWidth="137.0" styleClass="btnGuardar" text="Guardar" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+
+                            <Button onAction="#clearForm" prefHeight="33.0" prefWidth="137.0" styleClass="btnCancelar" text="Limpiar/Nuevo" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+
+                            <!-- Mensaje -->
+                            <Label fx:id="lbnMsg" style="-fx-text-fill: #444;" GridPane.columnSpan="4" GridPane.rowIndex="7" />
+
+                        </children>
+
+                        <rowConstraints>
+                            <RowConstraints />
+                            <RowConstraints />
+                            <RowConstraints />
+                            <RowConstraints />
+                            <RowConstraints />
+                            <RowConstraints />
+                            <RowConstraints />
+                     <RowConstraints />
+                        </rowConstraints>
+
+                    </GridPane>
+
+                </children>
+            </AnchorPane>
+
+            <!-- ======================================================
+                 TABLA ABAJO
+            ====================================================== -->
+            <AnchorPane styleClass="panel-table">
+                <children>
+                    <TableView fx:id="tableView" prefHeight="300" AnchorPane.bottomAnchor="5" AnchorPane.leftAnchor="5" AnchorPane.rightAnchor="5" AnchorPane.topAnchor="5" />
+                </children>
+            </AnchorPane>
+
+        </VBox>
+
+    </children>
+
+    <padding>
+        <Insets bottom="10" left="10" right="10" top="10" />
+    </padding>
+
+</AnchorPane>
