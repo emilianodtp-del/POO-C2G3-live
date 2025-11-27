@@ -13,4 +13,5 @@ public interface VentCarritoRepository extends ICrudGenericoRepository<VentCarri
 
     void deleteByDniruc(String dniruc);
 
+
 }

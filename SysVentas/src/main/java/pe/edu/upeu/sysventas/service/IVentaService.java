@@ -8,6 +8,7 @@ import java.io.File;
 import java.sql.SQLException;
 
 public interface IVentaService extends ICrudGenericoService<Venta,Long>{
+
     File getFile(String filex);
     JasperPrint runReport(Long idv) throws JRException, SQLException;
 

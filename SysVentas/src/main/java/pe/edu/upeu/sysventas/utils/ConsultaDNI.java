@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import pe.edu.upeu.sysventas.dto.PersonaDto;
 
 import java.io.IOException;
-
 @Component
 public  class ConsultaDNI {
 
@@ -51,11 +50,11 @@ public  class ConsultaDNI {
         return personaDto;
     }
 
-
     public static void main(String[] args) {
         ConsultaDNI c=new ConsultaDNI();
-       PersonaDto p= c.consultarDNI("43631917");
-        System.out.println(p.getDni()+" "+p.getNombre()+"  "+p.getApellidoPaterno()+"  "+p.getApellidoMaterno());
+        PersonaDto p=c.consultarDNI("43631917");
+        System.out.println(p.getDni()+" "+p.getNombre()
+                +"  "+p.getApellidoPaterno()+"  "+p.getApellidoMaterno());
     }
 
 }

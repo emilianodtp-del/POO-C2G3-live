@@ -1,0 +1,184 @@
+
+.button {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-padding: 6 12;
+}
+
+.btn-buscar {
+    -fx-background-color: #3FA9F5;
+}
+.btn-buscar:hover {
+    -fx-background-color: #1F8EDB;
+}
+
+.btn-add {
+    -fx-background-color: #8E44AD;
+}
+.btn-add:hover {
+    -fx-background-color: #732d91;
+}
+
+.btn-limpiar {
+    -fx-background-color: #2ECC71;
+}
+.btn-limpiar:hover {
+    -fx-background-color: #27AE60;
+}
+
+.btn-venta {
+    -fx-background-color: #E74C3C;
+}
+.btn-venta:hover {
+    -fx-background-color: #C0392B;
+}
+
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+}
+.table-view .column-header-background {
+    -fx-background-color: #f2f2f2;
+}
+
+/* ============================================================
+   ESTILO GENERAL DEL FORMULARIO
+   ============================================================ */
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-background-color: #f9fafb;
+}
+
+/* Paneles con sombra */
+.card {
+    -fx-background-color: white;
+    -fx-padding: 15;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 2);
+}
+
+/* ============================================================
+   TEXTFIELDS Y COMBOBOX (bordes suaves + efecto focus)
+   ============================================================ */
+.text-field, .combo-box {
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-padding: 6;
+    -fx-border-color: #d0d7de;
+    -fx-background-color: #ffffff;
+}
+
+.text-field:focused, .combo-box:focused {
+    -fx-border-color: #3FA9F5;
+    -fx-border-width: 1.6px;
+}
+
+/* Cuando hay error */
+.text-field-error {
+    -fx-border-color: #E74C3C !important;
+    -fx-border-width: 1.6;
+}
+
+/* ============================================================
+   LABELS
+   ============================================================ */
+.label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+/* ============================================================
+   BOTONES
+   ============================================================ */
+.button {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-padding: 6 12;
+}
+
+/* Buscar – Celeste */
+.btn-buscar {
+    -fx-background-color: #3FA9F5;
+}
+.btn-buscar:hover {
+    -fx-background-color: #1F8EDB;
+}
+
+/* Agregar – Morado */
+.btn-add {
+    -fx-background-color: #8E44AD;
+}
+.btn-add:hover {
+    -fx-background-color: #732d91;
+}
+
+/* Limpiar – Verde */
+.btn-limpiar {
+    -fx-background-color: #2ECC71;
+}
+.btn-limpiar:hover {
+    -fx-background-color: #27AE60;
+}
+
+/* Registrar venta – Rojo */
+.btn-venta {
+    -fx-background-color: #E74C3C;
+}
+.btn-venta:hover {
+    -fx-background-color: #C0392B;
+}
+
+/* ============================================================
+   TABLEVIEW PRO — estilo moderno
+   ============================================================ */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #d0d7de;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 0;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #f0f2f5;
+    -fx-background-radius: 8 8 0 0;
+}
+
+.table-view .column-header,
+.table-view .column-header .label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #444;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: white;
+}
+
+.table-view .table-row-cell:filled:hover {
+    -fx-background-color: #eaf3ff;
+}
+
+.table-view .table-row-cell:filled:selected {
+    -fx-background-color: #d6eaff;
+}
+
+/* ============================================================
+   SCROLLBARS (bonito y suave)
+   ============================================================ */
+.scroll-bar:vertical .thumb,
+.scroll-bar:horizontal .thumb {
+    -fx-background-color: #c7ced6;
+    -fx-background-radius: 4;
+}
+
+.scroll-bar:vertical .track,
+.scroll-bar:horizontal .track {
+    -fx-background-color: transparent;
+}
+

@@ -33,6 +33,7 @@ import java.util.stream.Collectors;
 
 @Controller
 public class ProductoController {
+
     @FXML
     TextField txtNombreProducto, txtPUnit,
             txtPUnitOld, txtUtilidad, txtStock, txtStockOld,
@@ -50,20 +51,21 @@ public class ProductoController {
     @FXML
     private AnchorPane miContenedor;
     Stage stage;
+
     @Autowired
     IMarcaService ms;
-
     @Autowired
     ICategoriaService cs;
     @Autowired
     ProductoIService ps;
+
     @Autowired
     IUnidadMedidaService ums;
+
     private Validator validator;
     ObservableList<Producto> listarProducto;
     Producto formulario;
     Long idProductoCE=0L;
-
 
     private void filtrarProductos(String filtro) {
         if (filtro == null || filtro.isEmpty()) {
@@ -164,9 +166,9 @@ public class ProductoController {
         TableViewHelper<Producto> tableViewHelper = new TableViewHelper<>();
         LinkedHashMap<String, ColumnInfo> columns = new LinkedHashMap<>();
         columns.put("ID Pro.", new ColumnInfo("idProducto", 60.0));
-        columns.put("Nombre Producto", new ColumnInfo("nombre", 200.0));
-        columns.put("P. Unitario", new ColumnInfo("pu", 150.0));
-        columns.put("Utilidad", new ColumnInfo("utilidad", 100.0));
+        columns.put("Nombre del Producto", new ColumnInfo("nombre", 200.0));
+        columns.put("Precio Unitario S/.", new ColumnInfo("pu", 150.0));
+        columns.put("Ganancia", new ColumnInfo("utilidad", 100.0));
         columns.put("Marca", new ColumnInfo("marca.nombre", 200.0));
         columns.put("Categoria", new ColumnInfo("categoria.nombre", 200.0));
         Consumer<Producto> updateAction = (Producto producto) -> {
@@ -187,7 +189,6 @@ public class ProductoController {
         tableView.setTableMenuButtonVisible(true);
         listar();
     }
-
 
     public void limpiarError() {
         List<Control> controles = List.of(
@@ -267,7 +268,6 @@ public class ProductoController {
         campos.put("marca", cbxMarca);
         campos.put("categoria", cbxCategoria);
         campos.put("unidadMedida", cbxUnidMedida);
-
         //Guarda los errores siguiendo el orden del formulario
         LinkedHashMap<String, String> erroresOrdenados = new LinkedHashMap<>();
         final Control[] primerControlConError = {null};
@@ -300,6 +300,7 @@ public class ProductoController {
             }
         }
     }
+
     private void procesarFormulario() {
         lbnMsg.setText("Formulario válido");
         lbnMsg.setStyle("-fx-text-fill: green; -fx-font-size: 16px;");
@@ -317,6 +318,7 @@ public class ProductoController {
         clearForm();
         listar();
     }
+
     @FXML
     public void validarFormulario() {
         formulario = new Producto();
@@ -326,11 +328,14 @@ public class ProductoController {
         formulario.setUtilidad(parseDoubleSafe(txtUtilidad.getText()));
         formulario.setStock(parseDoubleSafe(txtStock.getText()));
         formulario.setStockOld(parseDoubleSafe(txtStockOld.getText()));
-        String idxM=cbxMarca.getSelectionModel().getSelectedItem()==null?"0":cbxMarca.getSelectionModel().getSelectedItem().getKey();
+        String
+                idxM=cbxMarca.getSelectionModel().getSelectedItem()==null?"0":cbxMarca.getSelectionModel().getSelectedItem().getKey();
         formulario.setMarca(idxM=="0"?null:ms.findById(Long.parseLong(idxM)));
-        String idxC=cbxCategoria.getSelectionModel().getSelectedItem()==null?"0":cbxCategoria.getSelectionModel().getSelectedItem().getKey();
+        String
+                idxC=cbxCategoria.getSelectionModel().getSelectedItem()==null?"0":cbxCategoria.getSelectionModel().getSelectedItem().getKey();
         formulario.setCategoria(idxC=="0"?null:cs.findById(Long.parseLong(idxC)));
-        String idxUM=cbxUnidMedida.getSelectionModel().getSelectedItem()==null?"0":cbxUnidMedida.getSelectionModel().getSelectedItem().getKey();
+        String
+                idxUM=cbxUnidMedida.getSelectionModel().getSelectedItem()==null?"0":cbxUnidMedida.getSelectionModel().getSelectedItem().getKey();
         formulario.setUnidadMedida(idxUM=="0"?null:ums.findById(Long.parseLong(idxUM)));
         Set<ConstraintViolation<Producto>> violaciones = validator.validate(formulario);
         List<ConstraintViolation<Producto>> violacionesOrdenadas = violaciones.stream()
@@ -342,5 +347,7 @@ public class ProductoController {
             mostrarErroresValidacion(violacionesOrdenadas);
         }
     }
+
+
 
 }

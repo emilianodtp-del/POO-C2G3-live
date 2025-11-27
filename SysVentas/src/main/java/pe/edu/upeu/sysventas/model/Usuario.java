@@ -17,6 +17,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,14 +29,14 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
-    private Long idUsuario;
+    private Long idUsuario;   //01
     @Column(name = "user", nullable = false, unique = true, length = 20)
-    private String user;
+    private String user;      //02
     @Column(name = "clave", nullable = false, length = 100)
-    private String clave;
+    private String clave;     //03
     @Column(name = "estado", nullable = false, length = 10)
-    private String estado;
+    private String estado;    //04
     @JoinColumn(name = "id_perfil", referencedColumnName = "id_perfil")
     @ManyToOne(optional = false)
-    private Perfil idPerfil;
+    private Perfil idPerfil;  //05
 }

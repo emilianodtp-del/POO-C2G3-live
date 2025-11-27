@@ -6,6 +6,8 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,12 +23,19 @@ import pe.edu.upeu.sysventas.enums.TipoDocumento;
 public class Cliente {
 
     @Id
+    @Size(min = 2, max = 50, message = "DNI/RUC no debe de estar vacio")
     @Column(name = "dniruc", nullable = false, length = 12)
     private String dniruc;
+
+    @Size(min = 2, max = 50, message = "El nombre no debe de estar vacio")
     @Column(name = "nombres", nullable = false, length = 160)
     private String nombres;
-    @Column(name = "rep_legal", length = 160)
+
+    @Size(min = 2, max = 50, message = "Reporte Legal no debe de estar vacio")
+    @Column(name = "rep_legal", nullable = false,length = 160)
     private String repLegal;
+
+    @NotNull(message = "Tipo Documento no puede estar vacío")
     @Column(name = "tipo_documento", nullable = false, length = 12)
     @Enumerated(EnumType.STRING)
     private TipoDocumento tipoDocumento;

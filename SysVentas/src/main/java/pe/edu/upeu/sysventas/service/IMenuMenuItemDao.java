@@ -10,4 +10,3 @@ public interface IMenuMenuItemDao {
     List<MenuMenuItenTO> listaAccesos(String perfil, Properties idioma);
     Map<String, String[]> accesosAutorizados(List<MenuMenuItenTO> accesos);
 }
-
