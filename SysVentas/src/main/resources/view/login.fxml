@@ -13,7 +13,7 @@
             <children>
                 <ImageView fitHeight="104.0" fitWidth="111.0" layoutX="116.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../img/secrecy-icon.png" />
+                        <Image url="@../img/Icono-tienda.png" />
                     </image>
                 </ImageView>
             </children></AnchorPane>
